@@ -83,35 +83,63 @@ export const terrain = [
 export const projetAnnee =
   "Ouvrir trois bureaux au Cameroun : dans le Nord, à l’Ouest et à Douala, pour être au plus près des familles.";
 
+/** Les 8 rayons du catalogue (ordre d'affichage). Les identifiants correspondent à la base (migration 0003). */
 export const rayons = [
   {
-    id: "vetements",
-    titre: "Vêtements & objets personnalisés",
-    court: "Portez le message.",
-    texte: "Textiles et objets personnalisés aux couleurs de l’association, déclinés en plusieurs tailles et coloris.",
+    id: "tissus",
+    titre: "Tissus & tenues africaines",
+    court: "Wax, bogolan et créations.",
+    texte: "Tissus wax et bogolan, tenues, linge de maison : des créations aux couleurs de l’Afrique.",
     rotation: -4,
   },
   {
     id: "bijoux",
-    titre: "Bijoux",
-    court: "Acier inoxydable & pierres naturelles.",
-    texte: "Des bijoux en acier inoxydable et en pierres naturelles, à offrir ou à s’offrir.",
+    titre: "Bijoux en acier inoxydable",
+    court: "Parures, bagues, boucles.",
+    texte: "Colliers, parures, bagues et boucles d’oreilles en acier inoxydable, à offrir ou à s’offrir.",
     rotation: 3,
   },
   {
-    id: "livre",
-    titre: "Le livre",
-    court: "Une lecture qui prolonge la mission.",
-    texte: "Un livre pour prolonger la réflexion et faire connaître notre combat autour de vous.",
+    id: "flocage",
+    titre: "Flocage vêtements & accessoires",
+    court: "Portez le message.",
+    texte: "Sweats, t-shirts, tabliers, mugs et peluches floqués de messages qui relèvent.",
     rotation: -2,
   },
   {
-    id: "animations",
-    titre: "Animations",
-    court: "Pour vos événements, à notre profit.",
-    texte:
-      "Une prestation d’animation pour votre événement : l’intégralité des recettes soutient les actions de l’association.",
+    id: "jouets",
+    titre: "Jouets d’éveil",
+    court: "Apprendre en jouant.",
+    texte: "Jouets d’éveil inspirés de la pédagogie Montessori, en bois et en silicone, pour manipuler, trier, empiler et découvrir.",
+    rotation: 3,
+  },
+  {
+    id: "livres",
+    titre: "Livres",
+    court: "Des histoires qui relèvent.",
+    texte: "Des livres écrits et illustrés pour transmettre, faire rêver et prolonger notre mission.",
     rotation: 4,
+  },
+  {
+    id: "puzzles",
+    titre: "Puzzles",
+    court: "Des scènes de vie à reconstituer.",
+    texte: "Des puzzles illustrés de scènes de la vie africaine, à assembler en famille.",
+    rotation: -3,
+  },
+  {
+    id: "animations",
+    titre: "Ateliers & animations",
+    court: "Pour vos événements.",
+    texte: "Ateliers et animations pour vos événements, écoles et fêtes : les recettes soutiennent l’association.",
+    rotation: 2,
+  },
+  {
+    id: "dessin",
+    titre: "Ateliers dessin manuel & numérique",
+    court: "Créer, à la main ou à l’écran.",
+    texte: "Des ateliers de dessin, à la main et sur tablette, pour enfants et adultes.",
+    rotation: -1,
   },
 ] as const;
 

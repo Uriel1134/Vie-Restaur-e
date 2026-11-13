@@ -42,3 +42,17 @@ next-env.d.ts
 
 # documents client (brief, charte, données personnelles)
 /_brief/
+
+!.env.example
+
+# Cloudflare / OpenNext
+/.open-next/
+/.wrangler/
+/.dev.vars
+
+# photos sources du catalogue (importées dans Supabase Storage)
+/Catalogue_Vie-restauree/
+
+# photos WhatsApp reçues (sources, importées dans Supabase)
+/WhatsApp*/
+*.tsbuildinfo

@@ -54,7 +54,7 @@ export function PuceSceau({ className = "" }: { className?: string }) {
 export function Ruban({ children = "Association", className = "" }: { children?: string; className?: string }) {
   return (
     <span className={`inline-block -rotate-[4deg] drop-shadow-[2px_4px_5px_rgb(0_0_0/0.18)] ${className}`}>
-      <span className="bord-dechire block bg-ruban px-7 py-2 font-serif text-xl text-white">{children}</span>
+      <span className="entree-ruban bord-dechire block bg-ruban px-7 py-2 font-serif text-xl text-white">{children}</span>
     </span>
   );
 }
@@ -90,8 +90,8 @@ export function TraitManuscrit({ children, couleur = "var(--color-ruban)" }: { c
           stroke={couleur}
           strokeWidth="5"
           strokeLinecap="round"
-          pathLength={1}
-          strokeDasharray={1}
+          strokeDasharray={320}
+          style={{ "--longueur": 320 } as CSSProperties}
           className="animate-trait"
         />
       </svg>
@@ -106,7 +106,7 @@ export function TraitManuscrit({ children, couleur = "var(--color-ruban)" }: { c
 export function Etiquette({ children, clair = false }: { children: ReactNode; clair?: boolean }) {
   return (
     <p className={`flex items-center gap-3 font-serif text-lg italic ${clair ? "text-white/85" : "text-bleu-vie"}`}>
-      <span aria-hidden className={`h-px w-10 ${clair ? "bg-white/50" : "bg-bleu-vie/60"}`} />
+      <span aria-hidden className={`trait-etiquette h-px w-10 ${clair ? "bg-white/50" : "bg-bleu-vie/60"}`} />
       {children}
     </p>
   );
@@ -167,7 +167,7 @@ export function Timbre({
           </div>
         </div>
       </div>
-      <Cachet className="absolute -top-8 -right-6 size-24 rotate-[-14deg] text-bleu-profond/55 transition-transform duration-500 group-hover:rotate-[-4deg]" />
+      <Cachet className="sm:tampon absolute -top-8 -right-6 size-24 rotate-[-14deg] text-bleu-profond/55 transition-transform duration-500 group-hover:rotate-[-4deg]" />
     </figure>
   );
 }
@@ -188,7 +188,10 @@ export function EtiquetteSuspendue({
   delai?: number;
 }) {
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className="balancement flex flex-col items-center"
+      style={{ "--delai": `${Math.round(rotation * -900)}ms` } as CSSProperties}
+    >
       {/* ficelle */}
       <svg aria-hidden viewBox="0 0 40 80" className="relative z-10 h-20 w-10 text-bleu-vie/70">
         <path d="M20 0 C 8 22, 32 40, 20 72" fill="none" stroke="currentColor" strokeWidth="1.4" />

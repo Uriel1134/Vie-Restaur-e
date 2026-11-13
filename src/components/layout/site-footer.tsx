@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
-import logoBlanc from "@/assets/brand/logo-blanc.png";
 import { InstagramIcon, MailIcon, WhatsAppIcon } from "@/components/icons";
 import { Sceau } from "@/components/ui/decor";
+import { LogoLigne } from "@/components/ui/logo-ligne";
 import { mainNav, site, whatsappLink } from "@/config/site";
 
 const legalNav = [
@@ -13,7 +12,7 @@ const legalNav = [
 
 export function SiteFooter() {
   return (
-    <footer className="grain overflow-hidden bg-bleu-nuit text-white/80">
+    <footer className="grain overflow-hidden bg-bleu-nuit text-white/80 print:hidden">
       <Sceau className="absolute -top-64 -left-48 -z-10 size-[40rem] text-white/[0.07]" />
 
       {/* La signature, en grand : ce que l'on retient en quittant le site. */}
@@ -25,7 +24,9 @@ export function SiteFooter() {
 
       <div className="conteneur grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
-          <Image src={logoBlanc} alt="Vie Restaurée" className="h-20 w-auto" sizes="200px" />
+          <Link href="/" aria-label="Vie Restaurée — accueil">
+            <LogoLigne />
+          </Link>
           <p className="mt-6 max-w-xs text-[15px] leading-relaxed">
             Association loi 1901 au service des familles monoparentales, en Afrique et dans les pays en
             développement.
@@ -54,7 +55,10 @@ export function SiteFooter() {
             <li>
               <a href={`mailto:${site.email}`} className="flex items-center gap-3 hover:text-white">
                 <MailIcon className="size-5 shrink-0" />
-                <span className="break-all">{site.email}</span>
+                <span>
+                  {site.email.split("@")[0]}
+                  <wbr />@{site.email.split("@")[1]}
+                </span>
               </a>
             </li>
             {site.social.instagram && (
@@ -83,7 +87,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <p className="conteneur flex flex-col gap-1 py-6 text-[13px] text-white/60 sm:flex-row sm:justify-between">
+        <p className="conteneur flex flex-col gap-1 pt-6 pb-24 text-[13px] text-white/60 sm:flex-row sm:justify-between sm:pb-6">
           <span>
             © {site.legalName} · RNA {site.rna} · {site.registeredIn}
           </span>

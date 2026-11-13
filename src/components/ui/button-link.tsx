@@ -16,7 +16,7 @@ type Props = ComponentProps<typeof Link> & { variant?: Variant };
 export function ButtonLink({ variant = "principal", className = "", ...props }: Props) {
   return (
     <Link
-      className={`inline-flex min-h-12 items-center justify-center rounded-full px-7 py-3 text-[15px] font-semibold transition-colors ${styles[variant]} ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center rounded-full px-7 py-3 text-[15px] font-semibold transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] ${styles[variant]} ${className}`}
       {...props}
     />
   );

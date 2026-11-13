@@ -9,9 +9,10 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener"
       aria-label="Nous écrire sur WhatsApp"
-      className="fixed right-4 bottom-4 z-50 inline-flex size-14 items-center justify-center rounded-full bg-[#1f9e55] text-white shadow-lg transition-transform hover:scale-105 sm:right-6 sm:bottom-6"
+      className="fixed right-4 bottom-4 z-50 inline-flex size-14 print:hidden items-center justify-center rounded-full bg-[#1f9e55] text-white shadow-lg transition-transform hover:scale-105 sm:right-6 sm:bottom-6"
     >
-      <WhatsAppIcon className="size-7" />
+      <span aria-hidden className="appel absolute inset-0 rounded-full bg-[#1f9e55]" />
+      <WhatsAppIcon className="relative size-7" />
     </a>
   );
 }
