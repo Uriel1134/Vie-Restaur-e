@@ -58,7 +58,7 @@ export default async function EditionEvenement({ params }: PageProps<"/admin/age
             <ChampTexte
               nom="date"
               label="Date et heure"
-              aide="Heure de Paris."
+              aide="Heure de Paris. Jour pas encore fixé ? Choisissez le 1er du mois à 00:00 : le site affichera seulement le mois."
               type="datetime-local"
               valeur={ev ? versChampLocal(ev.date) : undefined}
               requis

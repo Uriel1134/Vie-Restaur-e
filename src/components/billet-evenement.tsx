@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { moisSeulement } from "@/lib/format";
 import type { Evenement } from "@/lib/types";
 
 const partie = (iso: string, opts: Intl.DateTimeFormatOptions) =>
@@ -23,16 +24,24 @@ export function BilletEvenement({
   sombre?: boolean;
 }) {
   const talon = sombre ? "bg-ruban text-bleu-nuit" : "bg-bleu-nuit text-white";
+  const mois = moisSeulement(ev.date);
   const doux = sombre ? "text-bleu-nuit/70" : "text-white/70";
   return (
     <article className="apparait flex h-full overflow-hidden rounded-carte bg-white text-texte shadow-papier">
       <div className={`flex w-24 shrink-0 flex-col items-center justify-center px-3 py-6 text-center sm:w-32 ${talon}`}>
         <span className={`text-sm tracking-[0.2em] uppercase ${doux}`}>{partie(ev.date, { month: "short" })}</span>
-        <span className="font-serif text-[2.8rem] leading-none font-semibold sm:text-[3.2rem]">
-          {partie(ev.date, { day: "numeric" })}
-        </span>
-        <span className={`mt-1 text-sm first-letter:uppercase ${doux}`}>{partie(ev.date, { weekday: "short" })}</span>
-        <span className={`text-sm ${doux}`}>{partie(ev.date, { hour: "2-digit", minute: "2-digit" })}</span>
+        {mois ? (
+          <>
+            <span className="font-serif text-[2.2rem] leading-none font-semibold sm:text-[2.5rem]">{partie(ev.date, { year: "numeric" })}</span>
+            <span className={`mt-1 text-sm ${doux}`}>Date à venir</span>
+          </>
+        ) : (
+          <>
+            <span className="font-serif text-[2.8rem] leading-none font-semibold sm:text-[3.2rem]">{partie(ev.date, { day: "numeric" })}</span>
+            <span className={`mt-1 text-sm first-letter:uppercase ${doux}`}>{partie(ev.date, { weekday: "short" })}</span>
+            <span className={`text-sm ${doux}`}>{partie(ev.date, { hour: "2-digit", minute: "2-digit" })}</span>
+          </>
+        )}
       </div>
       <div aria-hidden className="relative w-0 border-l-2 border-dashed border-bleu-vie/30">
         <span className={`absolute -top-3 -left-3 size-6 rounded-full ${fond}`} />
