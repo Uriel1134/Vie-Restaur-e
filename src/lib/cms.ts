@@ -147,3 +147,12 @@ export async function getBonCommande(jeton: string): Promise<BonCommande | null>
   const { data } = await c.rpc("voir_commande", { p_jeton: jeton });
   return (data as BonCommande | null) ?? null;
 }
+
+/** Derniers événements passés (le plus récent d'abord). */
+export async function getEvenementsPasses(limit = 6): Promise<Evenement[]> {
+  const c = client();
+  if (!c) return [];
+  const hier = new Date(Date.now() - 864e5).toISOString();
+  const { data } = await c.from("evenements").select("*").lt("date", hier).order("date", { ascending: false }).limit(limit);
+  return data ?? [];
+}

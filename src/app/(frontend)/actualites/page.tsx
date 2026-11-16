@@ -9,8 +9,8 @@ import { ArrowRightIcon, InstagramIcon, WhatsAppIcon } from "@/components/icons"
 import { Etiquette, Sceau, Scotch } from "@/components/ui/decor";
 import { site, whatsappLink } from "@/config/site";
 import { NOM_CATEGORIE } from "@/lib/admin/constantes";
-import { getActualites, getEvenementsAVenir } from "@/lib/cms";
-import { dateLongue } from "@/lib/format";
+import { getActualites, getEvenementsAVenir, getEvenementsPasses } from "@/lib/cms";
+import { dateLongue, moisSeulement } from "@/lib/format";
 
 // Contenus du dashboard : page régénérée au plus toutes les 5 min (et aussitôt après une modification).
 export const revalidate = 300;
@@ -28,7 +28,7 @@ const sommaire = [
 
 /** Articles et événements gérés depuis le dashboard ; états d'attente soignés tant qu'ils sont vides. */
 export default async function Actualites() {
-  const [articles, evenements] = await Promise.all([getActualites(30), getEvenementsAVenir()]);
+  const [articles, evenements, passes] = await Promise.all([getActualites(30), getEvenementsAVenir(), getEvenementsPasses()]);
   const [une, ...suite] = articles;
 
   return (
@@ -173,6 +173,44 @@ export default async function Actualites() {
               </a>
             </li>
           </ul>
+
+          {/* Événements passés : la preuve que l'association agit, au fil du temps */}
+          {passes.length > 0 && (
+            <div className="mt-16 border-t border-white/15 pt-10">
+              <p className="flex items-center gap-3 font-serif text-xl text-white/85 italic">
+                <Sceau plein className="size-3.5 text-ruban" />
+                Ils ont eu lieu
+              </p>
+              <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {passes.map((e) => (
+                  <li key={e.id} className="apparait flex gap-4 rounded-carte border border-white/15 bg-white/[0.06] p-5">
+                    <div className="flex w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-white/10 py-2 text-center">
+                      <span className="text-[11px] tracking-[0.15em] text-white/60 uppercase">
+                        {new Intl.DateTimeFormat("fr-FR", { month: "short", timeZone: "Europe/Paris" }).format(new Date(e.date))}
+                      </span>
+                      <span className="font-serif text-2xl leading-none font-semibold text-white">
+                        {moisSeulement(e.date)
+                          ? new Intl.DateTimeFormat("fr-FR", { year: "2-digit", timeZone: "Europe/Paris" }).format(new Date(e.date))
+                          : new Intl.DateTimeFormat("fr-FR", { day: "numeric", timeZone: "Europe/Paris" }).format(new Date(e.date))}
+                      </span>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-serif text-[1.1rem] leading-snug font-semibold text-white">{e.titre}</p>
+                      <p className="mt-0.5 text-sm text-white/70">
+                        {e.lieu} · {new Intl.DateTimeFormat("fr-FR", { year: "numeric", timeZone: "Europe/Paris" }).format(new Date(e.date))}
+                      </p>
+                      <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-ruban">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden className="size-3.5">
+                          <path d="m5 12.5 4.5 4.5L19 7.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        Réalisé
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
 
